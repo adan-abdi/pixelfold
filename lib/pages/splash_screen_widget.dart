@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pixelfield/blocs/app/app_bloc.dart';
+import 'package:pixelfield/blocs/app/app_event.dart';
 import 'package:pixelfield/pages/welcome_screen_widget.dart';
 
 class SplashScreenWidget extends StatefulWidget {
@@ -22,8 +25,10 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 1000));
-
-      GoRouter.of(context).goNamed(WelcomeScreenWidget.routeName);
+      if (mounted) {
+        context.read<AppBloc>().add(const StopShowingSplashImage());
+        context.goNamed(WelcomeScreenWidget.routeName);
+      }
     });
   }
 
@@ -41,7 +46,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF0B1519),
+        backgroundColor: const Color(0xFF0B1519),
         body: SafeArea(
           top: true,
           child: Column(
@@ -51,26 +56,24 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFF0B1519),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: Image.network(
+                      image: NetworkImage(
                         'https://otvrzeffbjqtvrxawiea.supabase.co/storage/v1/object/public/app-uploads//19de02ee16df1fdbe7d087bee76fec3f4d2006a7.png',
-                      ).image,
+                      ),
                     ),
                   ),
-                  child: Align(
+                  child: const Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Container(
+                    child: SizedBox(
                       width: 140.0,
                       height: 140.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: Image.network(
-                            'https://otvrzeffbjqtvrxawiea.supabase.co/storage/v1/object/public/app-uploads//logo.png',
-                          ).image,
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                          'https://otvrzeffbjqtvrxawiea.supabase.co/storage/v1/object/public/app-uploads//logo.png',
                         ),
                       ),
                     ),
