@@ -1,6 +1,8 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pixelfield/components/bottle_card_widget.dart';
 import 'package:pixelfield/components/bottom_tab_item_widget.dart';
+import 'package:pixelfield/utils/connectivity_service.dart';
+import 'package:pixelfield/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,6 +22,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   int tab2 = 1;
   int tab3 = 2;
   int? tab4 = 3;
+  bool _isLoading = true;
+  bool _hasInternet = true;
+  final ConnectivityService _connectivityService = ConnectivityService();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkConnectivity();
+    });
+  }
+
+  Future<void> _checkConnectivity() async {
+    print('Starting connectivity check...');
+    if (!mounted) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      final hasInternet = await _connectivityService.checkConnectivity();
+      print('Connectivity check result: $hasInternet');
+
+      if (!mounted) return;
+      setState(() {
+        _hasInternet = hasInternet;
+        _isLoading = false;
+      });
+      print(
+          'Loading state updated: _isLoading=$_isLoading, _hasInternet=$_hasInternet');
+    } catch (e) {
+      print('Error during connectivity check: $e');
+      if (!mounted) return;
+      setState(() {
+        _hasInternet = false;
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _connectivityService.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,43 +236,88 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                     ),
                                     InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {},
-                                        child: CircleAvatar(
-                                          backgroundColor: Color(0xFF0B1519),
-                                          child: Icon(
-                                            Icons.notifications_outlined,
-                                          ),
-                                        )),
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {},
+                                      child: CircleAvatar(
+                                        backgroundColor: Color(0xFF0B1519),
+                                        child:
+                                            Icon(Icons.notifications_outlined),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 0.0, 20.0, 0.0),
-                                child: GridView.builder(
-                                  padding: EdgeInsets.zero,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 16.0,
-                                    mainAxisSpacing: 16.0,
-                                    childAspectRatio: 0.55,
+                            if (_isLoading)
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 20.0, 0.0),
+                                  child: GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 16.0,
+                                      mainAxisSpacing: 16.0,
+                                      childAspectRatio: 0.55,
+                                    ),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: 4,
+                                    itemBuilder: (context, index) {
+                                      return const ShimmerLoading(height: 300);
+                                    },
                                   ),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: 4,
-                                  itemBuilder: (context, bottleCardIndex) {
-                                    return const BottleCardWidget();
-                                  },
+                                ),
+                              )
+                            else if (!_hasInternet)
+                              Expanded(
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.wifi_off,
+                                          size: 48, color: Colors.white60),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'No Internet Connection',
+                                        style: TextStyle(color: Colors.white60),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      ElevatedButton(
+                                        onPressed: _checkConnectivity,
+                                        child: Text('Retry'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            else
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 20.0, 0.0),
+                                  child: GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 16.0,
+                                      mainAxisSpacing: 16.0,
+                                      childAspectRatio: 0.55,
+                                    ),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: 4,
+                                    itemBuilder: (context, bottleCardIndex) {
+                                      return const BottleCardWidget();
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ),
