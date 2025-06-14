@@ -34,3 +34,30 @@
 - `flutter_bloc`: Essential for implementing the BLoC (Business Logic Component) pattern for state management, as required.
 - `equatable`: Used with BLoC to simplify equality comparisons of objects, reducing boilerplate code for state classes.
 
+## Project Screenshots
+
+<p align="center">
+  <img src="./assets/screenshots/1splash.png" alt="1. Splash" width="250"/>
+  <img src="./assets/screenshots/2welcome.png" alt="2. Welcome" width="250"/>
+  <img src="./assets/screenshots/3signup.png" alt="3. Signup" width="250"/>
+</p>
+<p align="center">
+  <img src="./assets/screenshots/4signin.png" alt="4. Signin" width="250"/>
+  <img src="./assets/screenshots/5signin-validation.png" alt="5. Signin Validation" width="250"/>
+  <img src="./assets/screenshots/6home-loading.png" alt="6. Home Loading" width="250"/>
+</p>
+<p align="center">
+  <img src="./assets/screenshots/7home.png" alt="7. Home" width="250"/>
+  <img src="./assets/screenshots/8detail-loading.png" alt="8. Detail Loading" width="250"/>
+  <img src="./assets/screenshots/9detail.png" alt="9. Detail" width="250"/>
+
+</p>
+<p align="center">
+  <img src="./assets/screenshots/10details.png" alt="10. Details" width="250"/>
+  <img src="./assets/screenshots/11tastingnotes.png" alt="11. Tasting Notes" width="250"/>
+  <img src="./assets/screenshots/12history.png" alt="12. History" width="250"/>
+</p>
+<p align="center">
+  <img src="./assets/screenshots/13home-no-connection.png" alt="13. Homepage No Connection" width="250"/>
+  <img src="./assets/screenshots/14detail-no-connection.png" alt="14. Detail page No Connection" width="250"/>
+</p>
