@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'bottom_tab_item_model.dart';
-export 'bottom_tab_item_model.dart';
 
 class BottomTabItemWidget extends StatefulWidget {
   const BottomTabItemWidget({
@@ -20,19 +18,14 @@ class BottomTabItemWidget extends StatefulWidget {
 }
 
 class _BottomTabItemWidgetState extends State<BottomTabItemWidget> {
-  late BottomTabItemModel _model;
 
   @override
   void initState() {
     super.initState();
-    _model = BottomTabItemModel();
-    _model.initState(context);
   }
 
   @override
   void dispose() {
-    _model.dispose();
-
     super.dispose();
   }
 

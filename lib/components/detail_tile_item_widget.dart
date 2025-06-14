@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'detail_tile_item_model.dart';
-export 'detail_tile_item_model.dart';
 
 class DetailTileItemWidget extends StatefulWidget {
   const DetailTileItemWidget({
@@ -18,19 +16,13 @@ class DetailTileItemWidget extends StatefulWidget {
 }
 
 class _DetailTileItemWidgetState extends State<DetailTileItemWidget> {
-  late DetailTileItemModel _model;
-
   @override
   void initState() {
     super.initState();
-    _model = DetailTileItemModel();
-    _model.initState(context);
   }
 
   @override
   void dispose() {
-    _model.dispose();
-
     super.dispose();
   }
 
@@ -44,7 +36,7 @@ class _DetailTileItemWidgetState extends State<DetailTileItemWidget> {
           borderRadius: BorderRadius.circular(0.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 8.0, 12.0),
+          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,22 +52,16 @@ class _DetailTileItemWidgetState extends State<DetailTileItemWidget> {
                       letterSpacing: 0.0,
                     ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    widget.subtitle!,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontFamily: GoogleFonts.lato().fontFamily,
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.normal,
-                          color: Theme.of(context).hintColor,
-                          fontSize: 16.0,
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ],
+              Text(
+                widget.subtitle!,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontFamily: GoogleFonts.lato().fontFamily,
+                      fontWeight: FontWeight.normal,
+                      fontStyle: FontStyle.normal,
+                      color: Colors.white60,
+                      fontSize: 16.0,
+                      letterSpacing: 0.0,
+                    ),
               ),
             ],
           ),

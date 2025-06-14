@@ -20,7 +20,6 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
   void initState() {
     super.initState();
 
-    // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 1000));
 

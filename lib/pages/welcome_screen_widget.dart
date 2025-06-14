@@ -16,7 +16,6 @@ class WelcomeScreenWidget extends StatefulWidget {
 }
 
 class _WelcomeScreenWidgetState extends State<WelcomeScreenWidget> {
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -63,7 +62,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreenWidget> {
                       decoration: const BoxDecoration(),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 0.0, 20.0, 100.0),
+                            20.0, 0.0, 20.0, 30.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,

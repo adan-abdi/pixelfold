@@ -16,7 +16,6 @@ class DetailTabBarItemWidget extends StatefulWidget {
 }
 
 class _DetailTabBarItemWidgetState extends State<DetailTabBarItemWidget> {
-
   @override
   void initState() {
     super.initState();
@@ -31,9 +30,9 @@ class _DetailTabBarItemWidgetState extends State<DetailTabBarItemWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: 100.0,
-      height: 100.0,
+      height: 40.0,
       decoration: BoxDecoration(
-        color: widget.isActive ? Color(0xFFDA9A00) : Color(0xFF0B1519),
+        color: widget.isActive ? Color(0xFFDA9A00) : const Color(0xFF0E1C21),
         borderRadius: BorderRadius.circular(6.0),
       ),
       child: Align(
@@ -44,9 +43,7 @@ class _DetailTabBarItemWidgetState extends State<DetailTabBarItemWidget> {
                 fontFamily: GoogleFonts.lato().fontFamily,
                 fontWeight: FontWeight.normal,
                 fontStyle: FontStyle.normal,
-                color: widget.isActive
-                    ? Colors.black
-                    : Theme.of(context).hintColor,
+                color: widget.isActive ? Colors.black : Colors.white60,
                 fontSize: 12.0,
                 letterSpacing: 0.0,
               ),

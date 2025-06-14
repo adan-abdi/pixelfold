@@ -109,8 +109,9 @@ class AppTextFormField extends StatelessWidget {
       enabled: enabled,
       maxLines: maxLines,
       minLines: minLines,
-      style: theme.textTheme.bodyMedium,
+      style: theme.textTheme.bodyMedium?.copyWith(color: Colors.white),
       decoration: InputDecoration(
+        filled: false,
         labelText: labelText,
         hintText: hintText,
         prefixIcon: prefixIcon,
@@ -118,51 +119,29 @@ class AppTextFormField extends StatelessWidget {
         contentPadding: contentPadding ?? const EdgeInsets.all(16),
         labelStyle: labelStyle ?? theme.textTheme.labelMedium,
         hintStyle: hintStyle ??
-            theme.textTheme.labelMedium?.copyWith(
-              color: theme.textTheme.labelMedium?.color?.withValues(
-                alpha: 0.5,
-                red: theme.textTheme.labelMedium?.color?.r,
-                green: theme.textTheme.labelMedium?.color?.g,
-                blue: theme.textTheme.labelMedium?.color?.b,
-              ),
-            ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: theme.colorScheme.outline,
-          ),
+            theme.textTheme.labelMedium
+                ?.copyWith(color: const Color(0xFFD49A00)),
+        border: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(0),
+          borderSide: BorderSide(color: Colors.white),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: theme.colorScheme.outline.withValues(
-              alpha: 0.5,
-              red: theme.colorScheme.outline.r,
-              green: theme.colorScheme.outline.g,
-              blue: theme.colorScheme.outline.b,
-            ),
-          ),
+        enabledBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(0),
+          borderSide: BorderSide(color: const Color(0xFFD49A00)),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+        focusedBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(0),
           borderSide: BorderSide(
-            color: theme.colorScheme.primary.withValues(
-              alpha: 0.1,
-              red: theme.colorScheme.primary.r,
-              green: theme.colorScheme.primary.g,
-              blue: theme.colorScheme.primary.b,
-            ),
+            color: const Color(0xFFD49A00),
             width: 2,
           ),
         ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: theme.colorScheme.error,
-          ),
+        errorBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(0),
+          borderSide: BorderSide(color: Colors.red),
         ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+        focusedErrorBorder: UnderlineInputBorder(
+          borderRadius: BorderRadius.circular(0),
           borderSide: BorderSide(
             color: theme.colorScheme.error,
             width: 2,

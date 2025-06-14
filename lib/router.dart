@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:pixelfield/app_state.dart';
-import 'package:pixelfield/pages/detail_page_widget.dart';
+import 'package:pixelfield/pages/detail_page.dart';
 import 'package:pixelfield/pages/home_page_widget.dart';
 import 'package:pixelfield/pages/sign_in_page_widget.dart';
 import 'package:pixelfield/pages/sign_up_page_widget.dart';
@@ -45,9 +45,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, state) => HomePageWidget(),
         ),
         GoRoute(
-          name: DetailPageWidget.routeName,
-          path: DetailPageWidget.routePath,
-          builder: (context, state) => DetailPageWidget(),
+          name: DetailPage.routeName,
+          path: DetailPage.routePath,
+          builder: (context, state) => DetailPage(),
         )
       ],
     );
